@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          'src/result.js': 'src/result.coffee'
+          "src/circle.js": "src/circle.coffee"
         }
       }
     },
@@ -55,8 +55,8 @@ module.exports = function(grunt) {
     },
     watch: {
       game: {
-        files: ['src/**/*.js', 'styles/**/*.css', 'config.js', 'index.html'],
-        tasks: ['jshint:game'],
+        files: ['src/**/*.js', 'src/**/*.coffee', 'styles/**/*.css', 'config.js', 'index.html'],
+        tasks: ['coffee'],
         options: {
           livereload: true
         }
@@ -83,8 +83,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-coffee');
 
   // Default task.
-  grunt.registerTask('default', ['jshint:game', 'connect:game', 'open:game', 'watch:game']);
+  grunt.registerTask('default', ['connect:game', 'coffee', 'open:game', 'watch:game']);
 
-  grunt.registerTask('build', ['jshint:game', 'dojo:game']);
+  grunt.registerTask('build', ['dojo:game']);
 
 };

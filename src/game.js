@@ -3,8 +3,9 @@ define([
   './draw',
   'frozen/box2d/BoxGame',
   'frozen/box2d/entities',
-  './boxData'
-], function(update, draw, BoxGame, entities, boxData){
+  './boxData',
+  './circle'
+], function(update, draw, BoxGame, entities, boxData, Circle) {
 
   'use strict';
 
@@ -23,9 +24,7 @@ define([
     }
   });
 
-
-  //if you want to take a look at the game object in dev tools
-  console.log(game);
+  var c = new Circle();
 
   //launch the game!
   game.run();
