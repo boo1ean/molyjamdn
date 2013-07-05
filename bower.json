@@ -1,0 +1,7 @@
+{
+  "name": "js-prototype",
+  "version": "0.0.0",
+  "dependencies": {
+    "frozen": "~0.4.1"
+  }
+}
