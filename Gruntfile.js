@@ -11,6 +11,14 @@ var hostname = process.platform !== 'win32' ? '0.0.0.0' : 'localhost';
 module.exports = function(grunt) {
   // Project configuration.
   grunt.initConfig({
+    coffee: {
+      compile: {
+        files: {
+          'src/result.js': 'src/result.coffee'
+        }
+      }
+    },
+
     jshint: {
       game: [
         'Gruntfile.js',
@@ -72,6 +80,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-connect');
+  grunt.loadNpmTasks('grunt-contrib-coffee');
 
   // Default task.
   grunt.registerTask('default', ['jshint:game', 'connect:game', 'open:game', 'watch:game']);
