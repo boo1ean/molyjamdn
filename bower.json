@@ -1,7 +1,11 @@
 {
-  "name": "js-prototype",
+  "name": "molyjamdn",
   "version": "0.0.0",
+  "main": "src/game.js",
   "dependencies": {
-    "frozen": "~0.4.1"
+    "frozen": "0.4.1"
+  },
+  "devDependencies": {
+    "util": "dojo/util#1.8.3"
   }
 }
