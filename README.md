@@ -1,4 +1,7 @@
 molyjamdn
 =========
 
-Moly Jam project
+```
+npm install -g bower yo generator-frozen
+bower install
+```
