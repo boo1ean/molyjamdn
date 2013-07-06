@@ -1,4 +1,6 @@
 define [
+	'lodash'
+	'./config'
 	'./update'
 	'./draw'
 	'frozen/box2d/BoxGame'
@@ -7,9 +9,7 @@ define [
 	'dojo/keys'
 	'./monster'
 	'./badguy'
-	], (update, draw, BoxGame, entities, boxData, keys, Monster, BadGuy) ->
-		speed = 3
-
+	], (_, config, update, draw, BoxGame, entities, boxData, keys, Monster, BadGuy) ->
 		guy = new BadGuy
 
 		game = new BoxGame
@@ -23,15 +23,31 @@ define [
 				im.addKeyAction keys.RIGHT_ARROW
 				im.addKeyAction keys.UP_ARROW
 				im.addKeyAction keys.DOWN_ARROW
+				im.addKeyAction keys.CTRL, true
 			,
 
 			handleInput: (im) ->
 				if im.keyActions[keys.LEFT_ARROW].isPressed()
-					this.box.applyImpulseDegrees "badguy", 270, speed
+					@box.applyImpulseDegrees "badguy", 270, config.hero_speed
+
 				if im.keyActions[keys.RIGHT_ARROW].isPressed()
-					this.box.applyImpulseDegrees "badguy", 90, speed
+					@box.applyImpulseDegrees "badguy", 90, config.hero_speed
+
 				if im.keyActions[keys.UP_ARROW].isPressed()
-					this.box.applyImpulseDegrees "badguy", 0, speed
+					@box.applyImpulseDegrees "badguy", 0, config.hero_speed
+
+				if im.keyActions[keys.DOWN_ARROW].isPressed()
+					@box.applyImpulseDegrees "badguy", 180, config.hero_speed
+
+				if im.keyActions[keys.CTRL].getAmount()
+					guy = game.entities.badguy
+					missle = Math.random()
+					game.addBody new entities.Rectangle
+						id: missle
+						x: guy.x * config.scale + guy.halfWidth + config.projectile_margin
+						y: guy.y * config.scale
+
+					@box.applyImpulseDegrees missle, 90, config.projectile_speed
 
 		game.addBody guy
 
