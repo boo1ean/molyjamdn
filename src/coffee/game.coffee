@@ -8,7 +8,7 @@ define [
 	'./monster'
 	'./badguy'
 	], (update, draw, BoxGame, entities, boxData, keys, Monster, BadGuy) ->
-		speed = 1
+		speed = 3
 
 		guy = new BadGuy
 
@@ -27,11 +27,11 @@ define [
 
 			handleInput: (im) ->
 				if im.keyActions[keys.LEFT_ARROW].isPressed()
-					this.box.applyImpulseDegrees "player", 270, speed
+					this.box.applyImpulseDegrees "badguy", 270, speed
 				if im.keyActions[keys.RIGHT_ARROW].isPressed()
-					this.box.applyImpulseDegrees "player", 90, speed
+					this.box.applyImpulseDegrees "badguy", 90, speed
 				if im.keyActions[keys.UP_ARROW].isPressed()
-					this.box.applyImpulseDegrees "player", 0, speed
+					this.box.applyImpulseDegrees "badguy", 0, speed
 
 		game.addBody guy
 

@@ -7,7 +7,7 @@ define [
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: 1
+		restitution: -2
 		linearDamping: 0
 		angularDamping: 0
 		staticBody: false
@@ -19,7 +19,7 @@ define [
 			@createAnimations()
 
 		draw: (ctx, scale) ->
-			@anims[@direction].draw ctx, @x, @y
+			@anims[@direction].draw ctx, @x * scale, @y * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
