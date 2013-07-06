@@ -14,7 +14,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          "src/circle.js": "src/circle.coffee"
+          "src/build/example.js": "src/coffee/example.coffee"
         }
       }
     },

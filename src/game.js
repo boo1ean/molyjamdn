@@ -3,9 +3,8 @@ define([
   './draw',
   'frozen/box2d/BoxGame',
   'frozen/box2d/entities',
-  './boxData',
-  './circle'
-], function(update, draw, BoxGame, entities, boxData, Circle) {
+  './boxData'
+], function(update, draw, BoxGame, entities, boxData) {
 
   'use strict';
 
@@ -23,8 +22,6 @@ define([
       game.addBody(new entities[entity.type](entity));
     }
   });
-
-  var c = new Circle();
 
   //launch the game!
   game.run();

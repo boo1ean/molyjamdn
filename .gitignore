@@ -19,3 +19,5 @@ deps/frozen/
 
 components
 dist
+
+src/build/*.js
