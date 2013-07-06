@@ -18,19 +18,10 @@ define [
 		constructor: ->
 			@createAnimations()
 
-		# draw: (ctx, scale) ->
-		# 	ctx.save()
-		# 	ctx.translate @x * @scale, @y * @scale
-		# 	ctx.rotate @angle
-		# 	ctx.translate -(@x) * @scale, -(@y) * @scale
-		# 	ctx.drawImage @img, 50 * @scale,
-		# 	50 * @scale
-		# 	ctx.restore()
-		# 	true
-			#@anims[@direction].draw ctx, @x * scale, @y * scale
+		draw: (ctx, scale) ->
+			@anims[@direction].draw ctx, @x, @y
 
 		updateAnimations: (millis) ->
-			@updateDirection()
 			@anims[@direction].update(millis)
 
 		createAnimations: ->
