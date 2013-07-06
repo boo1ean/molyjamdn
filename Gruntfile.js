@@ -14,8 +14,7 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
-          "src/js/game.js" : "src/coffee/game.coffee",
-          "src/js/staticobject.js" : "src/coffee/staticobject.coffee"
+          "src/js/game.js" : "src/coffee/game.coffee"
         }
       }
     },
