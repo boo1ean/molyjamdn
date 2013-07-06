@@ -55,7 +55,7 @@ module.exports = function(grunt) {
     },
     watch: {
       game: {
-        files: ['src/*.js', 'src/**/*.coffee', 'styles/**/*.css', 'config.js', 'index.html'],
+        files: ['src/js/data/*.js', 'src/**/*.coffee', 'styles/**/*.css', 'config.js', 'index.html'],
         tasks: ['coffee'],
         options: {
           livereload: true

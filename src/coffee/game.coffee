@@ -3,7 +3,7 @@ define [
 	'./draw'
 	'frozen/box2d/BoxGame'
 	 'frozen/box2d/entities'
-	'./boxData'
+	'./data/boxData'
 	'dojo/keys'
 	], (update, draw, BoxGame, entities, boxData, keys) ->
 		speed = 1

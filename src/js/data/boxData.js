@@ -7,7 +7,7 @@ define(
     {
       "x": 348.5,
       "y": 392,
-      "halfWidth": 317.5,
+      "halfWidth": 717.5,
       "halfHeight": 25,
       "staticBody": true,
       "zone": false,
