@@ -5,8 +5,12 @@ define [
 	 'frozen/box2d/entities'
 	'./data/boxData'
 	'dojo/keys'
-	], (update, draw, BoxGame, entities, boxData, keys) ->
+	'./monster'
+	'./badguy'
+	], (update, draw, BoxGame, entities, boxData, keys, Monster, BadGuy) ->
 		speed = 1
+
+		guy = new BadGuy
 
 		game = new BoxGame
 			canvasId: 'canvas',
@@ -29,6 +33,7 @@ define [
 				if im.keyActions[keys.UP_ARROW].isPressed()
 					this.box.applyImpulseDegrees "player", 0, speed
 
+		game.addBody guy
 
 		boxData.entities.forEach (entity) ->
 			if  entities[entity.type]
