@@ -8,5 +8,7 @@ define [
 		x: 170
 		y: 50
 		img: img
+		halfWidth: 96
+		halfHeight: 96
 		id: 'badguy'
 		direction: 0
