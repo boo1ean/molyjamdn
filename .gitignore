@@ -23,3 +23,6 @@ dist
 src/js/game.js
 src/js/badguy.js
 src/js/monster.js
+src/js/draw.js
+src/js/update.js
+src/js/config.js

@@ -14,9 +14,13 @@ module.exports = function(grunt) {
     coffee: {
       compile: {
         files: {
+          "src/js/config.js" : "src/coffee/config.coffee",
+          "src/js/update.js" : "src/coffee/update.coffee",
+          "src/js/draw.js" : "src/coffee/draw.coffee",
           "src/js/game.js" : "src/coffee/game.coffee",
           "src/js/monster.js" : "src/coffee/monster.coffee",
-          "src/js/badguy.js" : "src/coffee/badguy.coffee"
+          "src/js/badguy.js" : "src/coffee/badguy.coffee",
+          "src/js/horizontal-entity.js" : "src/coffee/horizontal-entity.coffee"
         }
       }
     },

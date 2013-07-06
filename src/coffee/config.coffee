@@ -1,0 +1,2 @@
+define
+	scale: 30
