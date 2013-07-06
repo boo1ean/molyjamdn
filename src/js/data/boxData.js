@@ -5,15 +5,17 @@ define(
 {
   "entities": [
     {
-      "x": 152,
-      "y": 84,
-      "radius": 47.634021455258214,
-      "staticBody": false,
+
+      "x": 1000,
+      "y": 0,
+      "halfWidth": 20,
+      "halfHeight": 300,
+      "staticBody": true,
       "zone": false,
-      "type": "Circle",
-      "fillStyle": "rgba(0,255,0,0.4)",
-      "id": "player"
+      "type": "Rectangle",
+      "id": 1
     }
+
   ],
   "joints": [],
   "canvas": {

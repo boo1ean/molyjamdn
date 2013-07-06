@@ -1,13 +1,14 @@
 define [
   'dcl'
+  './config'
   'frozen/box2d/entities/Rectangle'
   'frozen/Sprite'
   'frozen/Animation'
-], (dcl, Rectangle, Sprite, Animation) ->
+], (dcl, config, Rectangle, Sprite, Animation) ->
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: -2
+		restitution: 0.3
 		linearDamping: 0
 		angularDamping: 0
 		staticBody: false
@@ -15,21 +16,24 @@ define [
 		anims: []
 		img: null
 
-		constructor: ->
+		constructor: (id) ->
+			@id = id if id?
 			@createAnimations()
 
 		draw: (ctx, scale) ->
-			@anims[@direction].draw ctx, @x * scale, @y * scale
+			@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
 
 		createAnimations: ->
 			@anims = []
+			height = 2 * @halfHeight
+			width  = 2 * @halfWidth
 			for i in [0..7]
 				@anims[i] = new Animation
-					height: 96
-					width: 96
+					height: height
+					width: width
 					image: @img
 
 				for j in [0..7]
