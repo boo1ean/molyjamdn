@@ -20,4 +20,4 @@ deps/frozen/
 components
 dist
 
-src/build/*.js
+src/js/game.js

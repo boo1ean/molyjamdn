@@ -22,7 +22,7 @@ define(
       "zone": false,
       "type": "Circle",
       "fillStyle": "rgba(0,255,0,0.4)",
-      "id": 1
+      "id": "player"
     }
   ],
   "joints": [],
