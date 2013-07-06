@@ -20,7 +20,7 @@ module.exports = function(grunt) {
           "src/js/game.js" : "src/coffee/game.coffee",
           "src/js/monster.js" : "src/coffee/monster.coffee",
           "src/js/badguy.js" : "src/coffee/badguy.coffee",
-          "src/js/horizontal-entity.js" : "src/coffee/horizontal-entity.coffee"
+          "src/js/sceneobject.js" : "src/coffee/sceneobject.coffee"
         }
       }
     },
