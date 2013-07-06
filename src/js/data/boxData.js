@@ -5,7 +5,17 @@ define(['./utils/generator'], function(id) {
 				"x": 1000,
 				"y": 0,
 				"halfWidth": 20,
-				"halfHeight": 300,
+				"halfHeight": 200,
+				"staticBody": true,
+				"zone": false,
+				"type": "Rectangle",
+				"id": id()
+			},
+			{
+				"x": 0,
+				"y": 0,
+				"halfWidth": 20,
+				"halfHeight": 400,
 				"staticBody": true,
 				"zone": false,
 				"type": "Rectangle",

@@ -8,9 +8,9 @@ define [
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: 1
+		restitution: -5
 		linearDamping: 0
-		angularDamping: 0
+		angularDamping: 10000
 		staticBody: false
 		direction: 0
 		anims: []
@@ -20,8 +20,8 @@ define [
 			@id = id if id?
 			@createAnimations()
 
-		draw: (ctx, scale) ->
-			@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
+		#draw: (ctx, scale) ->
+			#@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
