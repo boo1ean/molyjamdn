@@ -20,8 +20,8 @@ define [
 			@id = id if id?
 			@createAnimations()
 
-		#draw: (ctx, scale) ->
-			#@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
+		draw: (ctx, scale) ->
+			@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
