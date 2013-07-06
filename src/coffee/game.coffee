@@ -73,19 +73,30 @@ define [
 				if im.keyActions[keys.CTRL].getAmount()
 					guy = game.entities.badguy
 					missle = Math.random()
-					game.addBody new entities.Rectangle
+					entity = new entities.Rectangle
 						id: missle
 						x: guy.x * config.scale + guy.halfWidth + config.projectile_margin
 						y: guy.y * config.scale
+						type: "destroy"
+
+					game.addBody entity
 
 					@box.applyImpulseDegrees missle, 90, config.projectile_speed
+					window.setTimeout ->
+						game.removeBody entity
+					, 300
 
 		game.addBody guy
 
-		#console.log level1Data.entities["sceneobject"]
-		#sceneObj = new SceneObject level1Data.entities[0],floorImage
+		Contact = require 'frozen/box2d/listeners/Contact'
+		contact = new Contact
+		contact.postSolve = (a, b) ->
+			if a? and "destroy" and game.entities[a]? and "destroy" is game.entities[a].type
+				game.removeBody game.entities[a]
 
-				
+			if b? and "destroy" and game.entities[b]? and "destroy" is game.entities[b].type
+				game.removeBody game.entities[b]
 
+		game.box.addContactListener contact
 
 		game.run()

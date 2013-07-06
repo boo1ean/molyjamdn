@@ -20,6 +20,16 @@ define(['./utils/generator'], function(id) {
 				"zone": false,
 				"type": "Rectangle",
 				"id": id()
+			},
+			{
+				"x": 0,
+				"y": 0,
+				"halfWidth": 1000,
+				"halfHeight": 50,
+				"staticBody": true,
+				"zone": false,
+				"type": "Rectangle",
+				"id": id()
 			}
 		],
 
