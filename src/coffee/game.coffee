@@ -27,7 +27,7 @@ define [
 			update: update,
 			draw: draw,
 			movie: movie,
-			xOffset: 0,
+			xOffset: -3150,
 			yOffset: 0,
 			movableScene: []
 			initInput: initInput
