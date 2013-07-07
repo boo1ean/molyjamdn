@@ -14,8 +14,8 @@ define [
 	'./badguy'
 	'./enemy'
 	'./sceneobject'
-	], (_, config, handleInput, initInput, update, draw, movie, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject) ->
-		speed = 3
+	'./collisions-listener'
+	], (_, config, handleInput, initInput, update, draw, movie, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject, contact) ->
 		guy = new BadGuy
 
 		window.config = config
@@ -58,16 +58,8 @@ define [
 
 		game.addBody enemy
 
-
 		game.movie()
 
-		Contact = require 'frozen/box2d/listeners/Contact'
-		contact = new Contact
-		contact.postSolve = (a, b) ->
-			if a? and "destroy" and game.entities[a]? and "destroy" is game.entities[a].type
-				game.removeBody game.entities[a]
-
-			if b? and "destroy" and game.entities[b]? and "destroy" is game.entities[b].type
-				game.removeBody game.entities[b]
 		game.box.addContactListener contact
+
 		game.run()

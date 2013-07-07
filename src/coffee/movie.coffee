@@ -4,8 +4,8 @@ define [
 	'./data/boxData'
 	'./sceneobject'
 ], (_, config,boxData, SceneObject) ->
-	() ->
-		cosmicShip = new SceneObject boxData["cosmicShipEntity"],boxData["cosmicShipEntity"].background
+	->
+		cosmicShip = new SceneObject boxData["cosmicShipEntity"], boxData["cosmicShipEntity"].background
 		@addBody cosmicShip
 		twee =
 			id : cosmicShip.id
@@ -13,6 +13,6 @@ define [
 			degrees: 0
 			power: 30
 			onFinish: ()->
-				# cosmicShip.staticBody = true
-				console.log "place continuing here!"
+				# place continuing here!
+
 		@updateQueue.push twee
