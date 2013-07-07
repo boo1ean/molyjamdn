@@ -6,6 +6,9 @@ define
 
 	debug: true
 
+	framesCount: 8
+	frameDuration: 125
+
 	hero_speed: 3
 	#TODO calculate by division of screen_width
 	screen_center: 650

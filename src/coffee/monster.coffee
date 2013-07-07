@@ -1,20 +1,36 @@
 define [
-  'dcl'
-  './config'
-  'frozen/box2d/entities/Rectangle'
-  'frozen/Sprite'
-  'frozen/Animation'
-], (dcl, config, Rectangle, Sprite, Animation) ->
+	'dcl'
+	'./config'
+	'frozen/box2d/entities/Rectangle'
+	'frozen/Sprite'
+	'frozen/Animation'
+	'frozen/plugins/loadSound!sfx/plasmagun'
+], (dcl, config, Rectangle, Sprite, Animation, shotSound) ->
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: -5
-		linearDamping: 0
-		angularDamping: 10000
+		restitution: 0
+		linearDamping: 1
+		angularDamping: 100000
 		staticBody: false
-		direction: 0
-		anims: []
-		img: null
+
+		FORWARD: 1
+		STAND: 0
+		BACKWARD: -1
+
+		direction: 0 # -1 | 0 | 1
+
+		anims:
+			run: {}
+			fire: {}
+			jump: {}
+
+		gfx:
+			run: null
+			fire: null
+			jump: null
+
+		jumpForce: 90
 
 		constructor: (id) ->
 			@id = id if id?
@@ -23,49 +39,53 @@ define [
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@anims.run[@anim].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
-			@anims[@direction].update(millis)
+			@updateDirection()
+			@anims.run[@anim].update millis 
 
 		createAnimations: ->
-			@anims = []
 			height = 2 * @halfHeight
 			width  = 2 * @halfWidth
-			for i in [0..7]
-				@anims[i] = new Animation
-					height: height
-					width: width
-					image: @img
 
-				for j in [0..7]
-					#@anims[i].addFrame 125, j + 8 * i, 0
-					@anims[i].addFrame 125, 0, 0
+			if @gfx.run?
+				@anims.run[0] = @getAnimation height, width, @gfx.run, 1
+				@anims.run[1] = @getAnimation height, width, @gfx.run, 0
+
+		getAnimation: (height, width, img, ySlot) ->
+			anim = new Animation
+			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height, ySlot
 
 		updateDirection: ->
-			if @linearVelocity
-				degrees = degreesFromCenter null, @linearVelocity
-
-			if degrees >= 22.5 and degrees < 67.5
-				@direction = @statics.NORTHEAST
-
-			else if degrees >= 67.5 and degrees < 112.5
-				@direction = @statics.EAST
-
-			else if degrees >= 112.5 and degrees < 157.5
-				@direction = @statics.SOUTHEAST
-
-			else if degrees >= 157.5 and degrees < 202.5
-				@direction = @statics.SOUTH
-
-			else if degrees >= 202.5 and degrees < 247.5
-				@direction = @statics.SOUTHWEST
-
-			else if degrees >= 247.5 and degrees < 292.5
-				@direction = @statics.WEST
-
-			else if degrees >= 292.5 and degrees < 337.5
-				@direction = @statics.NORTHWEST
-
+			if @linearVelocity.x > 0
+				@direction = @FORWARD
+				@anim = 1
 			else
-				@direction = @statics.NORTH
+				@direction = @BACKWARD
+				@anim = 0
+
+		fire: (game) ->
+			missle = Math.random()
+			offset = @direction * (@halfWidth + config.projectile_margin)
+			entity = new Rectangle
+				id: missle
+				x: @x * config.scale + offset
+				y: @y * config.scale
+				type: "destroy"
+
+			game.addBody entity
+
+			angle = if @direction is @FORWARD then 90 else 270
+			game.box.applyImpulseDegrees missle, angle, config.projectile_speed
+
+			shotSound.play()
+
+			window.setTimeout ->
+				game.removeBody entity
+			, 300
+
+		jump: (game) ->
+			if -0.01 < @linearVelocity.y < 0.01
+				console.log @linearVelocity
+				game.box.applyImpulseDegrees @id, 0, @jumpForce
