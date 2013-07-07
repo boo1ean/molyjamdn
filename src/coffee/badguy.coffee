@@ -8,7 +8,7 @@ define [
 	'use strict'
 	dcl Monster,
 		x: config.screen_center
-		y: 50
+		y: 400
 		halfWidth: 44
 		halfHeight: 43
 		id: 'badguy'
