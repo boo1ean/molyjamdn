@@ -14,13 +14,13 @@ define [
 
 		if a.type is "destroy"
 			if b.type is "monster"
-				b.onHit @game
+				b.onHit @game, a
 
 			@game.removeBody a
 
 		if b.type is "destroy"
 			if a.type is "monster"
-				a.onHit @game
+				a.onHit @game, b
 
 			@game.removeBody b
 

@@ -72,6 +72,7 @@ define [
 			missle = Math.random()
 			offset = @direction * (@halfWidth + config.projectile_margin)
 			entity = new Rectangle
+				source: @
 				id: missle
 				x: @x * config.scale + offset
 				y: @y * config.scale
@@ -93,5 +94,5 @@ define [
 				console.log @linearVelocity
 				game.box.applyImpulseDegrees @id, 0, @jumpForce
 
-		onHit: (game) ->
+		onHit: (game, entity) ->
 			console.log "Hit!"
