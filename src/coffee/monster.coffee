@@ -12,9 +12,21 @@ define [
 		linearDamping: 0
 		angularDamping: 10000
 		staticBody: false
-		direction: 0
-		anims: []
-		img: null
+
+		LEFT: 0
+		RIGHT: 1
+
+		direction: 0 # 0 - left, 1 - right
+
+		anims:
+			run: {}
+			fire: {}
+			jump: {}
+
+		gfx:
+			run: null
+			fire: null
+			jump: null
 
 		constructor: (id) ->
 			@id = id if id?
@@ -23,49 +35,24 @@ define [
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@anims.run[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
-			@anims[@direction].update(millis)
+			@updateDirection()
+			@anims.run[@direction].update millis 
 
 		createAnimations: ->
-			@anims = []
 			height = 2 * @halfHeight
 			width  = 2 * @halfWidth
-			for i in [0..7]
-				@anims[i] = new Animation
-					height: height
-					width: width
-					image: @img
 
-				for j in [0..7]
-					#@anims[i].addFrame 125, j + 8 * i, 0
-					@anims[i].addFrame 125, 0, 0
+			if @gfx.run?
+				@anims.run[@LEFT] = @getAnimation height, width, @gfx.run
+				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run
+
+		getAnimation: (height, width, img) ->
+			anim = new Animation
+			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height
 
 		updateDirection: ->
-			if @linearVelocity
-				degrees = degreesFromCenter null, @linearVelocity
-
-			if degrees >= 22.5 and degrees < 67.5
-				@direction = @statics.NORTHEAST
-
-			else if degrees >= 67.5 and degrees < 112.5
-				@direction = @statics.EAST
-
-			else if degrees >= 112.5 and degrees < 157.5
-				@direction = @statics.SOUTHEAST
-
-			else if degrees >= 157.5 and degrees < 202.5
-				@direction = @statics.SOUTH
-
-			else if degrees >= 202.5 and degrees < 247.5
-				@direction = @statics.SOUTHWEST
-
-			else if degrees >= 247.5 and degrees < 292.5
-				@direction = @statics.WEST
-
-			else if degrees >= 292.5 and degrees < 337.5
-				@direction = @statics.NORTHWEST
-
-			else
-				@direction = @statics.NORTH
+			@direction = (@linearVelocity.x > 0) - 0
+			@direction = 0
