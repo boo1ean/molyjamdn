@@ -1,10 +1,11 @@
 define [
-  'dcl'
-  './config'
-  'frozen/box2d/entities/Rectangle'
-  'frozen/Sprite'
-  'frozen/Animation'
-], (dcl, config, Rectangle, Sprite, Animation) ->
+	'dcl'
+	'./config'
+	'frozen/box2d/entities/Rectangle'
+	'frozen/Sprite'
+	'frozen/Animation'
+	'frozen/plugins/loadSound!sfx/plasmagun'
+], (dcl, config, Rectangle, Sprite, Animation, shotSound) ->
 	'use strict'
 
 	dcl [Sprite, Rectangle],
@@ -13,8 +14,9 @@ define [
 		angularDamping: 10000
 		staticBody: false
 
-		RIGHT: 0
-		LEFT: 1
+		FORWARD: 1
+		STAND: 0
+		BACKWARD: -1
 
 		direction: 0 # -1 | 0 | 1
 
@@ -46,8 +48,8 @@ define [
 			width  = 2 * @halfWidth
 
 			if @gfx.run?
-				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run, 1
-				@anims.run[@LEFT] = @getAnimation height, width, @gfx.run, 0
+				@anims.run[0] = @getAnimation height, width, @gfx.run, 1
+				@anims.run[1] = @getAnimation height, width, @gfx.run, 0
 
 		getAnimation: (height, width, img, ySlot) ->
 			anim = new Animation
@@ -55,8 +57,29 @@ define [
 
 		updateDirection: ->
 			if @linearVelocity.x > 0
-				@direction = 1
+				@direction = @FORWARD
 				@anim = 1
 			else
-				@direction = -1
+				@direction = @BACKWARD
 				@anim = 0
+
+		fire: (game) ->
+			console.log "asd"
+			missle = Math.random()
+			offset = @direction * (@halfWidth + config.projectile_margin)
+			entity = new Rectangle
+				id: missle
+				x: @x * config.scale + offset
+				y: @y * config.scale
+				type: "destroy"
+
+			game.addBody entity
+
+			angle = if @direction is @FORWARD then 90 else 270
+			game.box.applyImpulseDegrees missle, angle, config.projectile_speed
+
+			shotSound.play()
+
+			window.setTimeout ->
+				game.removeBody entity
+			, 300
