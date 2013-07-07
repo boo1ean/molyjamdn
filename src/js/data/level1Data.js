@@ -1,8 +1,7 @@
 define(['./utils/generator',
 		'frozen/plugins/loadImage!gfx/floor.png',
-		'frozen/plugins/loadImage!gfx/bad.png'
 	   ],
-	 function(id,floor,bad) {
+	 function(id,floor) {
 return {
 	 	"entities": [
 		{
