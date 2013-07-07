@@ -8,9 +8,9 @@ define [
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: 0.3
+		restitution: -5
 		linearDamping: 0
-		angularDamping: 0
+		angularDamping: 10000
 		staticBody: false
 		direction: 0
 		anims: []
