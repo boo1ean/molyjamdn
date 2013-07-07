@@ -13,10 +13,10 @@ define [
 		angularDamping: 10000
 		staticBody: false
 
-		LEFT: 0
-		RIGHT: 1
+		RIGHT: 0
+		LEFT: 1
 
-		direction: 0 # 0 - left, 1 - right
+		direction: 0 # -1 | 0 | 1
 
 		anims:
 			run: {}
@@ -46,12 +46,12 @@ define [
 			width  = 2 * @halfWidth
 
 			if @gfx.run?
-				@anims.run[@LEFT] = @getAnimation height, width, @gfx.run
-				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run
+				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run, 0
+				@anims.run[@LEFT] = @getAnimation height, width, @gfx.run, 0
 
-		getAnimation: (height, width, img) ->
+		getAnimation: (height, width, img, ySlot) ->
 			anim = new Animation
-			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height
+			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height, ySlot
 
 		updateDirection: ->
 			@direction = (@linearVelocity.x > 0) - 0
