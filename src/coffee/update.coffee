@@ -7,9 +7,17 @@ define [
 		# badguy.angle = 0
 		badguy.updateAnimations millis
 
-		
-		#move according to the camera
 		box = @box
+
+		_.each @updateQueue, (tweenObject) ->
+			if tweenObject.updateFramesCount isnt 0
+				console.log "tweenObjectid = ",tweenObject.id
+				box.applyImpulseDegrees tweenObject.id, tweenObject.degrees, tweenObject.power
+				tweenObject.updateFramesCount--
+			else if tweenObject.onFinish
+				tweenObject.onFinish()
+
+		#move according to the camera
 
 		if not @badguyPrevX?
 			@badguyPrevX = badguy.x

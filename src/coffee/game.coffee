@@ -5,16 +5,17 @@ define [
 	'./init-input'
 	'./update'
 	'./draw'
+	'./movie'
 	'frozen/box2d/BoxGame'
 	'frozen/box2d/entities'
 	'./data/boxData'
 	'./data/level1Data'
 	'./monster'
 	'./badguy'
+	'./enemy'
 	'./sceneobject'
-	'frozen/box2d/entities/Entity'
-	], (_, config, handleInput, initInput, update, draw, BoxGame, entities, boxData, level1Data, Monster, BadGuy, SceneObject, Entity) ->
-		speed = 3
+	'./collisions-listener'
+	], (_, config, handleInput, initInput, update, draw, movie, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject, contact) ->
 		guy = new BadGuy
 
 		window.config = config
@@ -25,11 +26,13 @@ define [
 			loadingBackground: "black"
 			update: update,
 			draw: draw,
+			movie: movie,
 			xOffset: 0,
 			yOffset: 0,
 			movableScene: []
 			initInput: initInput
 			handleInput: handleInput
+			updateQueue: []
 
 		game.addBody guy
 
@@ -40,13 +43,23 @@ define [
 			game.movableScene.push objectToAdd
 			objectToAdd.initialX = objectToAdd.x
 
-		Contact = require 'frozen/box2d/listeners/Contact'
-		contact = new Contact
-		contact.postSolve = (a, b) ->
-			if a? and "destroy" and game.entities[a]? and "destroy" is game.entities[a].type
-				game.removeBody game.entities[a]
+		enemy = new Enemy
+		enemy.x = Math.random()*100
+		enemy.y = Math.random()*100
+		enemy.id = "enemy"
+		enemy.game = game
+		enemy.badguy = guy
 
-			if b? and "destroy" and game.entities[b]? and "destroy" is game.entities[b].type
-				game.removeBody game.entities[b]
+		enemy.startMonitoring()
+		# enemy.halfWidth = 44
+		# enemy.halfHeight = 43
+		# enemy.gfx.run = img
+		game.movableScene.push enemy
+
+		game.addBody enemy
+
+		game.movie()
+
 		game.box.addContactListener contact
+
 		game.run()

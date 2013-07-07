@@ -22,8 +22,11 @@ module.exports = function(grunt) {
           "src/js/badguy.js" : "src/coffee/badguy.coffee",
           "src/js/handle-input.js" : "src/coffee/handle-input.coffee",
           "src/js/init-input.js" : "src/coffee/init-input.coffee",
+          "src/js/collisions-listener.js" : "src/coffee/collisions-listener.coffee",
           "src/js/data/utils/generator.js" : "src/coffee/generator.coffee",
-          "src/js/sceneobject.js" : "src/coffee/sceneobject.coffee"
+          "src/js/sceneobject.js" : "src/coffee/sceneobject.coffee",
+          "src/js/enemy.js" : "src/coffee/enemy.coffee",
+          "src/js/movie.js" : "src/coffee/movie.coffee",
         }
       }
     },

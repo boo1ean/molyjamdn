@@ -1,52 +1,19 @@
-define(['./utils/generator'], function(id) {
+define(['./utils/generator',
+		'frozen/plugins/loadImage!gfx/cosmicShip.png'
+		], function(id,cosmShip) {
 	return {
-		"entities": [
-			{
-				"x": 1000,
-				"y": 0,
-				"halfWidth": 20,
-				"halfHeight": 200,
-				"staticBody": true,
-				"zone": false,
-				"type": "Rectangle",
-				"id": id()
-			},
-			{
-				"x": 0,
-				"y": 0,
-				"halfWidth": 20,
-				"halfHeight": 400,
-				"staticBody": true,
-				"zone": false,
-				"type": "Rectangle",
-				"id": id()
-			},
-			{
-				"x": 0,
-				"y": 400,
-				"halfWidth": 1000,
-				"halfHeight": 50,
-				"staticBody": true,
-				"zone": false,
-				"type": "Rectangle",
-				"id": id()
-			},
-			{
-				"x": 0,
-				"y": 0,
-				"halfWidth": 1000,
-				"halfHeight": 50,
-				"staticBody": true,
-				"zone": false,
-				"type": "Rectangle",
-				"id": id()
-			}
-		],
-
+		"cosmicShipEntity":
+		{
+			"x": 300,
+			"y": 300,
+			"type": "Rectangle",
+			"id": "cosmicShip",
+			"background": cosmShip,
+		},
 		"joints": [],
 		"canvas": {
 			"height": 600,
-			"width": 800
+			"width": 1000
 		},
 
 		"backImg": null
