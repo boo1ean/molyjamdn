@@ -14,6 +14,8 @@ define [
 		angularDamping: 100000
 		staticBody: false
 
+		type: "monster"
+
 		FORWARD: 1
 		STAND: 0
 		BACKWARD: -1
@@ -70,6 +72,7 @@ define [
 			missle = Math.random()
 			offset = @direction * (@halfWidth + config.projectile_margin)
 			entity = new Rectangle
+				source: @
 				id: missle
 				x: @x * config.scale + offset
 				y: @y * config.scale
@@ -90,3 +93,6 @@ define [
 			if -0.01 < @linearVelocity.y < 0.01
 				console.log @linearVelocity
 				game.box.applyImpulseDegrees @id, 0, @jumpForce
+
+		onHit: (game, entity) ->
+			console.log "Hit!"
