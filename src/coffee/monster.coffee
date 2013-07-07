@@ -55,4 +55,3 @@ define [
 
 		updateDirection: ->
 			@direction = (@linearVelocity.x > 0) - 0
-			@direction = 0

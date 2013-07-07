@@ -8,8 +8,8 @@ define [
 	dcl Monster,
 		x: config.screen_center
 		y: 50
-		halfWidth: 48
-		halfHeight: 64
+		halfWidth: 44
+		halfHeight: 43
 		id: 'badguy'
 		gfx:
 			run: img
