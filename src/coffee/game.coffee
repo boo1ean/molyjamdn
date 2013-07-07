@@ -45,7 +45,7 @@ define [
 
 		enemy = new Enemy
 		enemy.x = Math.random()*100
-		enemy.y = Math.random()*100
+		enemy.y = Math.random()*100+300
 		enemy.id = "enemy"
 		enemy.game = game
 		enemy.badguy = guy

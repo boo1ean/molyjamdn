@@ -9,13 +9,19 @@ define [
 
 		box = @box
 
-		_.each @updateQueue, (tweenObject) ->
-			if tweenObject.updateFramesCount isnt 0
-				console.log "tweenObjectid = ",tweenObject.id
+		_.each @updateQueue, (tweenObject, indx) ->
+			console.log "indx",indx
+			if tweenObject.updateFramesCount % 5 is 0
+				console.log "tweenObject.updateFramesCount",tweenObject.updateFramesCount
 				box.applyImpulseDegrees tweenObject.id, tweenObject.degrees, tweenObject.power
-				tweenObject.updateFramesCount--
-			else if tweenObject.onFinish
+			else if tweenObject.updateFramesCount <= 0 
 				tweenObject.onFinish()
+				console.log @updateQueue
+				@updateQueue.splice indx,1
+				# debugger;
+			tweenObject.updateFramesCount--
+			# updateQueue.
+		, @
 
 		#move according to the camera
 
