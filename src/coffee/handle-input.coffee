@@ -1,4 +1,5 @@
-define ['./config', 'dojo/keys', 'frozen/box2d/entities/Rectangle'], (config, keys, Rectangle) ->
+define ['./config', 'dojo/keys', 'frozen/box2d/entities/Rectangle',
+		'frozen/plugins/loadSound!sfx/plasmagun'], (config, keys, Rectangle,shotSound) ->
 	(im) ->
 		if im.keyActions[keys.LEFT_ARROW].isPressed()
 			@box.applyImpulseDegrees "badguy", 270, config.hero_speed
@@ -23,6 +24,7 @@ define ['./config', 'dojo/keys', 'frozen/box2d/entities/Rectangle'], (config, ke
 				type: "destroy"
 
 			game.addBody entity
+			shotSound.play();
 
 			@box.applyImpulseDegrees missle, 90, config.projectile_speed
 			window.setTimeout ->
