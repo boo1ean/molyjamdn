@@ -4,7 +4,8 @@ define [
   './monster'
   'frozen/plugins/loadImage!gfx/run.png'
   "frozen/utils/distance"
-], (dcl, config, Monster, img, distance) ->
+  "frozen/utils/degreesFromCenter"
+], (dcl, config, Monster, img, distance, degreesFromCenter) ->
 	'use strict'
 
 	dcl [Monster],
@@ -36,16 +37,32 @@ define [
 			window.setInterval ->
 				dist = distance {x:that.x, y:that.y},{x:that.badguy.x, y:that.badguy.y}
 				intervalID = 0
-				console.log "dist",dist
+				# console.log "dist",dist
 				if dist < 35
-					if not @intervalID
-						@intervalID = that.startFiring()
-						console.log "intervalID created!",@intervalID
+					if not that.intervalID
+						that.intervalID = that.startFiring()
+						# console.log "intervalID created!",@intervalID
+						# degreesFromCenter(center, point)
+						that.startFollowing()
 				else
-					clearInterval @intervalID
-					console.log "intervalID deleted!",@intervalID
-					@intervalID = null
+					clearInterval that.intervalID
+					# console.log "intervalID deleted!",that.intervalID
+					that.intervalID = null
 			, 1000
+
+		startFollowing: ->
+			degr = degreesFromCenter {x:@x, y:@y},{x:@badguy.x, y:@badguy.y}
+			# console.log "degr",degr
+			that = @
+			twee =
+				id : that.id
+				updateFramesCount: 100
+				degrees: degr
+				power: 10
+				onFinish: ()->
+					# place continuing here!
+			@game.updateQueue.push twee
+		
 
 		# constructor: dcl.superCall (sup) ->
 		# 	(id) ->
