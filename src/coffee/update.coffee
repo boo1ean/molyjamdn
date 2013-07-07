@@ -10,16 +10,12 @@ define [
 		
 		#move according to the camera
 		box = @box
-		# if badguy.x >= 40
-		# xMod = badguy.x - 500/30
+
 		if not @badguyPrevX?
 			@badguyPrevX = badguy.x
 		xMod = @badguyPrevX - badguy.x
-		# oneMorePreviusX = _.clone @badguyPrevX
-		# @badguyPrevX = badguy.x
 
-		# console.log "xMod", xMod
-		if badguy.x > 40
+		if badguy.x >  @width/config.scale - config.scroll_margin
 			#if xMod started to be positive that means we changed te direction and have to stop moving camera
 			if xMod < 0
 				badguy.x = @badguyPrevX
@@ -33,7 +29,7 @@ define [
 			else
 				xMod = 0
 
-		if badguy.x < 5
+		if badguy.x < config.scroll_margin
 			if xMod > 0
 				badguy.x = @badguyPrevX
 				box.setPosition "badguy", badguy.x, badguy.y
@@ -45,5 +41,39 @@ define [
 					box.setPosition ent.id, ent.x, ent.y
 			else
 				xMod = 0
-
 		@badguyPrevX = badguy.x
+
+		# going Y
+
+		if not @badguyPrevY?
+			@badguyPrevY = badguy.y
+		yMod = @badguyPrevY - badguy.y
+
+		# console.log "@height",@height
+		if badguy.y > @height/config.scale - config.scroll_margin
+			#if xMod started to be positive that means we changed te direction and have to stop moving camera
+			if yMod < 0
+				badguy.y = @badguyPrevY
+				box.setPosition "badguy", badguy.x, badguy.y
+				@yOffset += yMod
+				_.each @movableScene, (ent) -> 
+					#move shape
+					ent.y += yMod
+					#move colliding box
+					box.setPosition ent.id, ent.x, ent.y
+			else
+				yMod = 0
+
+		if badguy.y < config.scroll_margin
+			if yMod > 0
+				badguy.y = @badguyPrevY
+				box.setPosition "badguy", badguy.x, badguy.y
+				@yOffset += yMod
+				_.each @movableScene, (ent) -> 
+					#move shape
+					ent.y += yMod
+					#move colliding box
+					box.setPosition ent.id, ent.x, ent.y
+			else
+				yMod = 0
+		@badguyPrevY = badguy.y

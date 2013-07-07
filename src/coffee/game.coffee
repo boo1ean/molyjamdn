@@ -26,6 +26,7 @@ define [
 			update: update,
 			draw: draw,
 			xOffset: 0,
+			yOffset: 0,
 			movableScene: []
 			initInput: initInput
 			handleInput: handleInput
