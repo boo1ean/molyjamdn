@@ -16,12 +16,16 @@ define [
 
 		type: "monster"
 
-		FORWARD: 1
-		STAND: 0
-		BACKWARD: -1
+		states:
+			WALKING: 0
+			STANDING: 1
+
+		directions:
+			LEFT: 0
+			RIGHT: 1
 
 		direction: 0 # -1 | 0 | 1
-		anim: 0
+		state: 0
 
 		anims:
 			run: {}
@@ -42,11 +46,11 @@ define [
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@anims.run[@anim].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@anims.run[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@updateDirection()
-			@anims.run[@anim].update millis 
+			@anims.run[@direction].update millis 
 
 		createAnimations: ->
 			height = 2 * @halfHeight
@@ -61,16 +65,19 @@ define [
 			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height, ySlot
 
 		updateDirection: ->
-			if @linearVelocity.x > 0
-				@direction = @FORWARD
-				@anim = 1
+			x = @linearVelocity.x
+			if Math.abs(x) > 0.3
+				@state     = @states.WALKING
+				@direction = if x > 0 then @directions.RIGHT else @directions.LEFT
 			else
-				@direction = @BACKWARD
-				@anim = 0
+				@states.STANDING
 
 		fire: (game) ->
 			missle = Math.random()
-			offset = @direction * (@halfWidth + config.projectile_margin)
+
+			dir    = if @direction is @directions.LEFT then -1 else 1
+			offset = dir * (@halfWidth + config.projectile_margin)
+			debugger
 			entity = new Rectangle
 				source: @
 				id: missle
@@ -80,7 +87,7 @@ define [
 
 			game.addBody entity
 
-			angle = if @direction is @FORWARD then 90 else 270
+			angle = if @direction is @directions.RIGHT then 90 else 270
 			game.box.applyImpulseDegrees missle, angle, config.projectile_speed
 
 			shotSound.play()
