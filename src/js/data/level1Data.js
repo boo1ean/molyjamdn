@@ -1,11 +1,13 @@
 define(['./utils/generator',
 		'frozen/plugins/loadImage!gfx/floor.png',
+        'frozen/plugins/loadImage!gfx/floor2.png',
 		'frozen/plugins/loadImage!gfx/floor_long.png',
     	'frozen/plugins/loadImage!gfx/decor.png',
 		'frozen/plugins/loadImage!gfx/building1.png',
-		'frozen/plugins/loadImage!gfx/stair.png'
+		'frozen/plugins/loadImage!gfx/stair.png',
+        'frozen/plugins/loadImage!gfx/tree1.png'
 	   ],
-	 function(id,floor, floor_long, decor, building1, stair) {
+	 function(id, floor, floor2, floor_long, decor, building1, stair, tree1) {
 return {
 	 	"entities": [
         {
@@ -201,6 +203,48 @@ return {
             "id": id(),
             "background": building1
         },
+
+        {
+            "x": -870,
+            "y": 600,
+            "staticBody": true,
+            "zone": false,
+            "staticBody": true,
+            "type": "Rectangle",
+            "id": id(),
+            "background": floor
+        },
+        {
+            "x": -1150,
+            "y": 500,
+            "staticBody": true,
+            "zone": false,
+            "staticBody": true,
+            "type": "Rectangle",
+            "id": id(),
+            "background": floor2
+        },
+        {
+            "x": -870,
+            "y": 480,
+            "staticBody": true,
+            "zone": false,
+            "staticBody": true,
+            "type": "Rectangle",
+            "id": id(),
+            "background": tree1
+        },
+        {
+            "x": -2200,
+            "y": 400,
+            "staticBody": true,
+            "zone": false,
+            "staticBody": true,
+            "type": "Rectangle",
+            "id": id(),
+            "background": floor_long
+        },
+
 		],
 		"backImg": null
 	} 
