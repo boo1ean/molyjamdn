@@ -9,9 +9,9 @@ define [
 	'use strict'
 
 	dcl [Sprite, Rectangle],
-		restitution: -5
-		linearDamping: 0
-		angularDamping: 10000
+		restitution: 0
+		linearDamping: 1
+		angularDamping: 100000
 		staticBody: false
 
 		FORWARD: 1
@@ -30,6 +30,8 @@ define [
 			run: null
 			fire: null
 			jump: null
+
+		jumpForce: 90
 
 		constructor: (id) ->
 			@id = id if id?
@@ -65,7 +67,6 @@ define [
 				@anim = 0
 
 		fire: (game) ->
-			console.log "asd"
 			missle = Math.random()
 			offset = @direction * (@halfWidth + config.projectile_margin)
 			entity = new Rectangle
@@ -84,3 +85,8 @@ define [
 			window.setTimeout ->
 				game.removeBody entity
 			, 300
+
+		jump: (game) ->
+			if -0.01 < @linearVelocity.y < 0.01
+				console.log @linearVelocity
+				game.box.applyImpulseDegrees @id, 0, @jumpForce
