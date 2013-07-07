@@ -5,6 +5,7 @@ define [
 	'./init-input'
 	'./update'
 	'./draw'
+	'./movie'
 	'frozen/box2d/BoxGame'
 	'frozen/box2d/entities'
 	'./data/boxData'
@@ -13,7 +14,7 @@ define [
 	'./badguy'
 	'./enemy'
 	'./sceneobject'
-	], (_, config, handleInput, initInput, update, draw, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject) ->
+	], (_, config, handleInput, initInput, update, draw, movie, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject) ->
 		speed = 3
 		guy = new BadGuy
 
@@ -25,11 +26,13 @@ define [
 			loadingBackground: "black"
 			update: update,
 			draw: draw,
+			movie: movie,
 			xOffset: 0,
 			yOffset: 0,
 			movableScene: []
 			initInput: initInput
 			handleInput: handleInput
+			updateQueue: []
 
 		game.addBody guy
 
@@ -54,6 +57,9 @@ define [
 		game.movableScene.push enemy
 
 		game.addBody enemy
+
+
+		game.movie()
 
 		Contact = require 'frozen/box2d/listeners/Contact'
 		contact = new Contact

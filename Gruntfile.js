@@ -24,7 +24,8 @@ module.exports = function(grunt) {
           "src/js/init-input.js" : "src/coffee/init-input.coffee",
           "src/js/data/utils/generator.js" : "src/coffee/generator.coffee",
           "src/js/sceneobject.js" : "src/coffee/sceneobject.coffee",
-          "src/js/enemy.js" : "src/coffee/enemy.coffee"
+          "src/js/enemy.js" : "src/coffee/enemy.coffee",
+          "src/js/movie.js" : "src/coffee/movie.coffee",
         }
       }
     },
