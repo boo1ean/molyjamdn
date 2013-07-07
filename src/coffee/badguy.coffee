@@ -13,6 +13,7 @@ define [
 		halfWidth: 44
 		halfHeight: 43
 		id: 'badguy'
+		hp: 100
 		fixedRotation: true
 		gfx:
 			run: run

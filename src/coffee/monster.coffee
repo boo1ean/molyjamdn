@@ -14,6 +14,7 @@ define [
 		fixedRotation: true
 		staticBody: false
 
+		hp: 5
 		type: "monster"
 
 		states:
@@ -25,6 +26,7 @@ define [
 			RIGHT: 1
 
 		isFiring: false
+		killed: false
 		direction: 0
 		state: 0
 
@@ -145,5 +147,12 @@ define [
 			if -0.01 < @linearVelocity.y < 0.01
 				game.box.applyImpulseDegrees @id, 0, @jumpForce
 
+		destructor: ->
+
 		onHit: (game, entity) ->
-			console.log "Hit!"
+			if entity.type is "destroy"
+				console.log "hit"
+				@hp = @hp - 1
+				if @hp <= 0
+					@killed = true
+					@destructor()
