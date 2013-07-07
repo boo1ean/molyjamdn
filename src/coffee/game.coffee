@@ -58,8 +58,9 @@ define [
 
 		game.addBody enemy
 
-		game.movie()
+		#game.movie()
 
+		contact.game = game
 		game.box.addContactListener contact
 
 		game.run()
