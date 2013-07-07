@@ -11,7 +11,7 @@ define [
 	dcl [Sprite, Rectangle],
 		restitution: 0
 		linearDamping: 1
-		angularDamping: 100000
+		fixedRotation: true
 		staticBody: false
 
 		type: "monster"
@@ -31,11 +31,13 @@ define [
 			run: {}
 			fire: {}
 			jump: {}
+			stand: {}
 
 		gfx:
 			run: null
 			fire: null
 			jump: null
+			stand: null
 
 		jumpForce: 90
 
@@ -46,11 +48,17 @@ define [
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@anims.run[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@currentAnimation().draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@updateDirection()
-			@anims.run[@direction].update millis 
+			@currentAnimation().update millis
+
+		currentAnimation: ->
+			if @state is @states.WALKING
+				return @anims.run[@direction]
+			if @state is @states.STANDING
+				return @anims.stand[@direction]
 
 		createAnimations: ->
 			height = 2 * @halfHeight
@@ -59,6 +67,10 @@ define [
 			if @gfx.run?
 				@anims.run[0] = @getAnimation height, width, @gfx.run, 1
 				@anims.run[1] = @getAnimation height, width, @gfx.run, 0
+
+			if @gfx.stand?
+				@anims.stand[0] = @getAnimation height, width, @gfx.stand, 1
+				@anims.stand[1] = @getAnimation height, width, @gfx.stand, 0
 
 		getAnimation: (height, width, img, ySlot) ->
 			anim = new Animation
@@ -70,14 +82,13 @@ define [
 				@state     = @states.WALKING
 				@direction = if x > 0 then @directions.RIGHT else @directions.LEFT
 			else
-				@states.STANDING
+				@state = @states.STANDING
 
 		fire: (game) ->
 			missle = Math.random()
 
 			dir    = if @direction is @directions.LEFT then -1 else 1
 			offset = dir * (@halfWidth + config.projectile_margin)
-			debugger
 			entity = new Rectangle
 				source: @
 				id: missle

@@ -3,8 +3,8 @@ define [
 	'./monster'
 	'./config'
 	'frozen/plugins/loadImage!gfx/run.png'
-	'frozen/box2d/entities/Rectangle'
-], (dcl, Monster, config, img, Rectangle) ->
+	'frozen/plugins/loadImage!gfx/stand.png'
+], (dcl, Monster, config, run, stand) ->
 	'use strict'
 	dcl Monster,
 		x: config.screen_center
@@ -12,5 +12,7 @@ define [
 		halfWidth: 44
 		halfHeight: 43
 		id: 'badguy'
+		fixedRotation: true
 		gfx:
-			run: img
+			run: run
+			stand: stand
