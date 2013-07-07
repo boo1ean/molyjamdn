@@ -22,8 +22,7 @@ define [
 
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
-				#uncomment to show collision box
-				sup.apply @,arguments
+				sup.apply @,arguments if config.debug
 				@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
