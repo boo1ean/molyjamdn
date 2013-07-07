@@ -20,8 +20,11 @@ define [
 			@id = id if id?
 			@createAnimations()
 
-		draw: (ctx, scale) ->
-			@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+		draw: dcl.superCall (sup) ->
+			(ctx, scale) ->
+				#uncomment to show collision box
+				sup.apply @,arguments
+				@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
@@ -37,7 +40,8 @@ define [
 					image: @img
 
 				for j in [0..7]
-					@anims[i].addFrame 125, j + 8 * i, 0
+					#@anims[i].addFrame 125, j + 8 * i, 0
+					@anims[i].addFrame 125, 0, 0
 
 		updateDirection: ->
 			if @linearVelocity
