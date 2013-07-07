@@ -9,32 +9,33 @@ return {
 			"x": 0,
 			"y": 300,
 			"staticBody": true,
-			"zone": false,
+			"zone": true,
 			"type": "Rectangle",
 			"id": id(),
 			"background": floor
 		},
 		{
 			"x": 350,
-			"y": 300,
+			"y": 250,
 			"staticBody": true,
-			"zone": false,
+			"zone": true,
 			"type": "Rectangle",
 			"id": id(),
 			"background": floor
 		},
 		{
 			"x": 700,
-			"y": 300,
+			"y": 200,
 			"staticBody": true,
 			"zone": false,
+			"staticBody": true,
 			"type": "Rectangle",
 			"id": id(),
 			"background": floor
 		},		
 		{
 			"x": 1050,
-			"y": 300,
+			"y": 200,
 			"staticBody": true,
 			"zone": false,
 			"type": "Rectangle",
@@ -52,7 +53,7 @@ return {
 		},
 		{
 			"x": 1750,
-			"y": 300,
+			"y": 350,
 			"staticBody": true,
 			"zone": false,
 			"type": "Rectangle",

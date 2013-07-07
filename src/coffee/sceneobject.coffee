@@ -13,13 +13,12 @@ define [
 				if entity.type is 'Rectangle'
 					entity.halfWidth = img.width/2
 					entity.halfHeight = img.height/2
-				console.log "entity.halfHeight",entity.halfHeight
 				sup.apply @,arguments
 
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				#uncomment to show collision box
-				#sup.apply @,arguments
-				ctx.drawImage @img, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale, @img.width, @img.height
+				# sup.apply @,arguments
+				ctx.drawImage @img, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale, @img.width,@img.height
 			
 

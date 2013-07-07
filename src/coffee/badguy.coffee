@@ -1,13 +1,14 @@
 define [
 	'dcl'
 	'./monster'
-	'frozen/plugins/loadImage!gfx/walking.png'
-], (dcl, Monster, img) ->
+	'./config'
+	'frozen/plugins/loadImage!gfx/goodAnimated.png'
+], (dcl, Monster, config, img) ->
 	'use strict'
 	dcl Monster,
-		x: 170
+		x: config.screen_center
 		y: 50
 		img: img
 		halfWidth: 48
-		halfHeight: 48
+		halfHeight: 64
 		id: 'badguy'

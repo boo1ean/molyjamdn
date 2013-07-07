@@ -28,7 +28,9 @@ define [
 			loadingBackground: "black"
 			update: update,
 			draw: draw,
-			xOffset: 0
+			xOffset: 0,
+			#things which will be moving when character moves
+			movableScene: []
 	
 			initInput: (im) ->
 				im.addKeyAction keys.LEFT_ARROW
@@ -69,13 +71,14 @@ define [
 						game.removeBody entity
 					, 300
 
+		game.addBody guy
+
 		_.each level1Data.entities, (entity) ->
 			image = entity.background
-			console.log "image just created! its width is ", image.width
-			console.log "image is ", image
-			game.addBody new SceneObject entity,image
-
-		game.addBody guy
+			objectToAdd = new SceneObject entity,image
+			game.addBody objectToAdd
+			game.movableScene.push objectToAdd
+			objectToAdd.initialX = objectToAdd.x
 
 		Contact = require 'frozen/box2d/listeners/Contact'
 		contact = new Contact
