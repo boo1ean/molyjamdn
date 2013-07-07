@@ -21,7 +21,7 @@ define [
 			@createAnimations()
 
 		draw: (ctx, scale) ->
-			@anims[@direction].draw ctx, (@x - @halfHeight) * scale, (@y - @halfHeight) * scale
+			@anims[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@anims[@direction].update(millis)
