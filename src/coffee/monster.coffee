@@ -35,18 +35,18 @@ define [
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@anims.run[@direction].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@anims.run[@anim].draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@updateDirection()
-			@anims.run[@direction].update millis 
+			@anims.run[@anim].update millis 
 
 		createAnimations: ->
 			height = 2 * @halfHeight
 			width  = 2 * @halfWidth
 
 			if @gfx.run?
-				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run, 0
+				@anims.run[@RIGHT] = @getAnimation height, width, @gfx.run, 1
 				@anims.run[@LEFT] = @getAnimation height, width, @gfx.run, 0
 
 		getAnimation: (height, width, img, ySlot) ->
@@ -54,4 +54,9 @@ define [
 			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height, ySlot
 
 		updateDirection: ->
-			@direction = (@linearVelocity.x > 0) - 0
+			if @linearVelocity.x > 0
+				@direction = 1
+				@anim = 1
+			else
+				@direction = -1
+				@anim = 0
