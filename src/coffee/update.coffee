@@ -3,6 +3,12 @@ define [
 	'./config'
 ], (_, config) ->
 	(millis) ->
+		_.each @movableScene, (entity, index) ->
+			if entity.killed? and entity.killed
+				@removeBody entity
+				@movableScene.splice index, 1
+		, @
+
 		badguy = @entities.badguy
 		# badguy.angle = 0
 		badguy.updateAnimations millis

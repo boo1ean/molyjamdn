@@ -68,17 +68,11 @@ define [
 					that.jump that.game
 			, 500
 
-		# constructor: dcl.superCall (sup) ->
-		# 	(id) ->
-		# 		sup.apply @, arguments
-
-		removeIntervals: ->
+		destructor: ->
 			clearInterval(@monitoringInterval)
-			@monitoringInterval = null
 			clearInterval(@followingInterval)
-			@followingInterval = null
 			clearInterval(@fireInterval)
-			@fireInterval = null
-
-
-
+			_.each @game.updateQueue, (twee, index) ->
+				if twee.id? and @id?
+					@game.updateQueue.splice(index, 1) if twee.id = @id
+			, @
