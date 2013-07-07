@@ -15,7 +15,6 @@ define [
 		staticBody: false
 		halfWidth: 44
 		halfHeight: 43
-		intervalID: null
 		gfx:
 			run: img
 
@@ -28,46 +27,58 @@ define [
 			# , 1000
 		startFiring: ->
 			that = @
-			@intervalID = window.setInterval ->
+			@fireInterval = window.setInterval ->
 				that.fire that.game
 			, 500
 
 		startMonitoring: ->
 			that = @
-			window.setInterval ->
+			@monitoringInterval = window.setInterval ->
 				dist = distance {x:that.x, y:that.y},{x:that.badguy.x, y:that.badguy.y}
-				intervalID = 0
 				# console.log "dist",dist
 				if dist < 35
-					if not that.intervalID
-						that.intervalID = that.startFiring()
-						# console.log "intervalID created!",@intervalID
-						# degreesFromCenter(center, point)
+					if not that.fireInterval
+						that.fireInterval = that.startFiring()
 						that.startFollowing()
 				else
-					clearInterval that.intervalID
+					clearInterval that.fireInterval
 					# console.log "intervalID deleted!",that.intervalID
-					that.intervalID = null
+					that.fireInterval = null
 			, 1000
 
 		startFollowing: ->
-			degr = degreesFromCenter {x:@x, y:@y},{x:@badguy.x, y:@badguy.y}
-			# console.log "degr",degr
 			that = @
-			twee =
-				id : that.id
-				updateFramesCount: 100
-				degrees: degr
-				power: 10
-				onFinish: ()->
-					# place continuing here!
-			@game.updateQueue.push twee
-		
+			@followingInterval = window.setInterval ->
+				degr = degreesFromCenter {x:that.x, y:that.y},{x:that.badguy.x, y:that.badguy.y}
+				if degr > 180
+					that.direction = that.directions.LEFT
+				else
+					that.direction = that.directions.RIGHT
+
+				twee =
+					id : that.id
+					updateFramesCount: 20
+					degrees: degr
+					power: 10
+					onFinish: ()->
+						# place continuing here!
+				that.game.updateQueue.push twee
+
+				if Math.rand() * 5  is 0 
+				that.jump that.game
+			, 500
 
 		# constructor: dcl.superCall (sup) ->
 		# 	(id) ->
 		# 		sup.apply @, arguments
 
+		removeIntervals: ->
+			clearInterval(@monitoringInterval)
+			@monitoringInterval = null
+			clearInterval(@followingInterval)
+			@followingInterval = null
+			clearInterval(@fireInterval)
+			@fireInterval = null
 
 
 
