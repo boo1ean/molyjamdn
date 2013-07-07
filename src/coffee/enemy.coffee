@@ -1,14 +1,15 @@
 define [
-  'dcl'
-  './config'
-  './monster'
-  'frozen/plugins/loadImage!gfx/run.png'
-  "frozen/utils/distance"
-  "frozen/utils/degreesFromCenter"
-], (dcl, config, Monster, img, distance, degreesFromCenter) ->
-	'use strict'
-
-	dcl [Monster],
+	'dcl'
+	'./config'
+	'./monster'
+	"frozen/utils/distance"
+	"frozen/utils/degreesFromCenter"
+	'frozen/plugins/loadImage!gfx/enemy-run.png'
+	'frozen/plugins/loadImage!gfx/enemy-stand.png'
+	'frozen/plugins/loadImage!gfx/enemy-fire.png'
+	'frozen/plugins/loadImage!gfx/enemy-fire-run.png'
+], (dcl, config, Monster, distance, degreesFromCenter, run, stand, fire, fireRun) ->
+	dcl Monster,
 		restitution: -5
 		linearDamping: 0
 		angularDamping: 10000
@@ -16,15 +17,11 @@ define [
 		halfWidth: 44
 		halfHeight: 43
 		gfx:
-			run: img
+			run: run
+			stand: stand
+			fire: fire
+			fireRun: fireRun
 
-		
-		#constructor: (game) ->
-			#@game = game
-			# that = @
-			# window.setInterval ->
-			# 	that.fire game
-			# , 1000
 		startFiring: ->
 			that = @
 			@fireInterval = window.setInterval ->
@@ -73,6 +70,6 @@ define [
 			clearInterval(@followingInterval)
 			clearInterval(@fireInterval)
 			_.each @game.updateQueue, (twee, index) ->
-				if twee.id? and @id?
+				if twee?
 					@game.updateQueue.splice(index, 1) if twee.id = @id
 			, @
