@@ -6,9 +6,9 @@ define [
 	(ctx) ->
 		ctx.drawImage backgroundImg, @xOffset, -backgroundImg.height/5 + @yOffset,  backgroundImg.width,  backgroundImg.height
 		
-		# _.each @entities, (ent) ->
-		# 	if ent.maskBits is null
-		# 		ent.draw ctx, config.scale		
+		_.each @entities, (ent) ->
+#			if ent.maskBits is null
+			ent.draw ctx, config.scale
 
 		for i in [10..0]
 			_.each @entities, (ent) ->
