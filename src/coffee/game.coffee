@@ -28,6 +28,7 @@ define [
 			loadingBackground: "black"
 			update: update,
 			draw: draw,
+			xOffset: 0
 	
 			initInput: (im) ->
 				im.addKeyAction keys.LEFT_ARROW
@@ -40,9 +41,11 @@ define [
 			handleInput: (im) ->
 				if im.keyActions[keys.LEFT_ARROW].isPressed()
 					@box.applyImpulseDegrees "badguy", 270, config.hero_speed
+					# @xOffset += 13
 
 				if im.keyActions[keys.RIGHT_ARROW].isPressed()
 					@box.applyImpulseDegrees "badguy", 90, config.hero_speed
+					# @xOffset -= 13
 
 				if im.keyActions[keys.UP_ARROW].isPressed()
 					@box.applyImpulseDegrees "badguy", 0, config.hero_speed

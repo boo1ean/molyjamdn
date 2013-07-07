@@ -1,8 +1,9 @@
 define [
 	'lodash'
 	'./config'
-], (_, config) ->
+	'frozen/plugins/loadImage!gfx/background.jpg'
+], (_, config,backgroundImg) ->
 	(ctx) ->
-		ctx.fillRect 0, 0, @width, @height
+		ctx.drawImage backgroundImg, @xOffset, -backgroundImg.height/3,  backgroundImg.width,  backgroundImg.height
 		_.each @entities, (ent) ->
 			ent.draw ctx, config.scale
