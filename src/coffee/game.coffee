@@ -27,7 +27,7 @@ define [
 			update: update,
 			draw: draw,
 			movie: movie,
-			xOffset: 0,
+			xOffset: -3150,
 			yOffset: 0,
 			movableScene: []
 			initInput: initInput
@@ -43,20 +43,20 @@ define [
 			game.movableScene.push objectToAdd
 			objectToAdd.initialX = objectToAdd.x
 
-		enemy = new Enemy
-		enemy.x = Math.random()*100
-		enemy.y = Math.random()*100+300
-		enemy.id = "enemy"
-		enemy.game = game
-		enemy.badguy = guy
-
-		enemy.startMonitoring()
-		# enemy.halfWidth = 44
-		# enemy.halfHeight = 43
-		# enemy.gfx.run = img
-		game.movableScene.push enemy
-
-		game.addBody enemy
+#		enemy = new Enemy
+#		enemy.x = Math.random()*100
+#		enemy.y = Math.random()*100+300
+#		enemy.id = "enemy"
+#		enemy.game = game
+#		enemy.badguy = guy
+#
+#		enemy.startMonitoring()
+#		# enemy.halfWidth = 44
+#		# enemy.halfHeight = 43
+#		# enemy.gfx.run = img
+#		game.movableScene.push enemy
+#
+#		game.addBody enemy
 
 		#game.movie()
 
