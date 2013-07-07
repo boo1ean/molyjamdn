@@ -7,7 +7,7 @@ return {
 	 	"entities": [
 		{
 			"x": 0,
-			"y": 300,
+			"y": 500,
 			"staticBody": true,
 			"zone": true,
 			"type": "Rectangle",
@@ -16,7 +16,7 @@ return {
 		},
 		{
 			"x": 350,
-			"y": 250,
+			"y": 550,
 			"staticBody": true,
 			"zone": true,
 			"type": "Rectangle",
@@ -25,7 +25,7 @@ return {
 		},
 		{
 			"x": 700,
-			"y": 200,
+			"y": 500,
 			"staticBody": true,
 			"zone": false,
 			"staticBody": true,
@@ -35,7 +35,7 @@ return {
 		},		
 		{
 			"x": 1050,
-			"y": 200,
+			"y": 500,
 			"staticBody": true,
 			"zone": false,
 			"type": "Rectangle",
@@ -44,7 +44,7 @@ return {
 		},
 		{
 			"x": 1400,
-			"y": 300,
+			"y": 600,
 			"staticBody": true,
 			"zone": false,
 			"type": "Rectangle",
@@ -53,7 +53,7 @@ return {
 		},
 		{
 			"x": 1750,
-			"y": 350,
+			"y": 650,
 			"staticBody": true,
 			"zone": false,
 			"type": "Rectangle",

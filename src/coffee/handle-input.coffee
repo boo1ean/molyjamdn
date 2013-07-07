@@ -1,4 +1,4 @@
-define ['./config', 'dojo/keys'], (config, keys) ->
+define ['./config', 'dojo/keys', 'frozen/box2d/entities/Rectangle'], (config, keys, Rectangle) ->
 	(im) ->
 		if im.keyActions[keys.LEFT_ARROW].isPressed()
 			@box.applyImpulseDegrees "badguy", 270, config.hero_speed
@@ -13,9 +13,10 @@ define ['./config', 'dojo/keys'], (config, keys) ->
 			@box.applyImpulseDegrees "badguy", 180, config.hero_speed
 
 		if im.keyActions[keys.CTRL].getAmount()
-			guy = @entities.badguy
+			game = @
+			guy = game.entities.badguy
 			missle = Math.random()
-			entity = new entities.Rectangle
+			entity = new Rectangle
 				id: missle
 				x: guy.x * config.scale + guy.halfWidth + config.projectile_margin
 				y: guy.y * config.scale

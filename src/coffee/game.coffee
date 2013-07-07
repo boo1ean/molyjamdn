@@ -17,6 +17,7 @@ define [
 		speed = 3
 		guy = new BadGuy
 
+		window.config = config
 		game = new BoxGame
 			canvasId: 'canvas',
 			gameAreaId: 'gameArea',
@@ -25,7 +26,6 @@ define [
 			update: update,
 			draw: draw,
 			xOffset: 0,
-			#things which will be moving when character moves
 			movableScene: []
 			initInput: initInput
 			handleInput: handleInput
