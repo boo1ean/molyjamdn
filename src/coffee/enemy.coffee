@@ -64,8 +64,8 @@ define [
 						# place continuing here!
 				that.game.updateQueue.push twee
 
-				if Math.rand() * 5  is 0
-				that.jump that.game
+				if Math.random() * 5  is 0
+					that.jump that.game
 			, 500
 
 		# constructor: dcl.superCall (sup) ->

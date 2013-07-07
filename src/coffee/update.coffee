@@ -10,6 +10,8 @@ define [
 		box = @box
 
 		_.each @updateQueue, (tweenObject, indx) ->
+			return unless tweenObject?
+
 			# console.log "indx",indx
 			if tweenObject.updateFramesCount % 5 is 0
 				# console.log "tweenObject.updateFramesCount",tweenObject.updateFramesCount
