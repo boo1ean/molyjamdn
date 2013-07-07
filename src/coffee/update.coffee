@@ -15,7 +15,7 @@ define () ->
 			xMod = badguy.x - @badguyPrevX
 			badguy.x = @badguyPrevX
 			box.setPosition "badguy", badguy.x, badguy.y
-		@badguyPrevX = badguy.x;
+		@badguyPrevX = badguy.x
 		# console.log "xMod",xMod
 		# console.log "badguyPrevX",@badguyPrevX
 		_.each @movableScene, (ent) -> 
