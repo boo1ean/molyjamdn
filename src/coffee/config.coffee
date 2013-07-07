@@ -1,7 +1,7 @@
 define
 	scale: 30
 
-	projectile_margin: 80
+	projectile_margin: 45
 	projectile_speed: 30
 
 	debug: true
