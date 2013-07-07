@@ -4,8 +4,9 @@ define [
 	'./config'
 	'frozen/plugins/loadImage!gfx/run.png'
 	'frozen/plugins/loadImage!gfx/stand.png'
-], (dcl, Monster, config, run, stand) ->
-	'use strict'
+	'frozen/plugins/loadImage!gfx/fire.png'
+	'frozen/plugins/loadImage!gfx/fire-run.png'
+], (dcl, Monster, config, run, stand, fire, fireRun) ->
 	dcl Monster,
 		x: config.screen_center
 		y: 400
@@ -16,3 +17,5 @@ define [
 		gfx:
 			run: run
 			stand: stand
+			fire: fire
+			fireRun: fireRun

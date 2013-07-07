@@ -24,7 +24,8 @@ define [
 			LEFT: 0
 			RIGHT: 1
 
-		direction: 0 # -1 | 0 | 1
+		isFiring: false
+		direction: 0
 		state: 0
 
 		anims:
@@ -32,12 +33,14 @@ define [
 			fire: {}
 			jump: {}
 			stand: {}
+			fireRun: {}
 
 		gfx:
 			run: null
 			fire: null
 			jump: null
 			stand: null
+			fireRun: null
 
 		jumpForce: 90
 
@@ -55,10 +58,16 @@ define [
 			@currentAnimation().update millis
 
 		currentAnimation: ->
-			if @state is @states.WALKING
-				return @anims.run[@direction]
-			if @state is @states.STANDING
-				return @anims.stand[@direction]
+			if @isFiring
+				if @state is @states.WALKING
+					return @anims.fireRun[@direction]
+				if @state is @states.STANDING
+					return @anims.fire[@direction]
+			else
+				if @state is @states.WALKING
+					return @anims.run[@direction]
+				if @state is @states.STANDING
+					return @anims.stand[@direction]
 
 		createAnimations: ->
 			height = 2 * @halfHeight
@@ -72,6 +81,14 @@ define [
 				@anims.stand[0] = @getAnimation height, width, @gfx.stand, 1
 				@anims.stand[1] = @getAnimation height, width, @gfx.stand, 0
 
+			if @gfx.fire?
+				@anims.fire[0] = @getAnimation height, width, @gfx.fire, 1
+				@anims.fire[1] = @getAnimation height, width, @gfx.fire, 0
+
+			if @gfx.fireRun?
+				@anims.fireRun[0] = @getAnimation height, width, @gfx.fireRun, 1
+				@anims.fireRun[1] = @getAnimation height, width, @gfx.fireRun, 0
+
 		getAnimation: (height, width, img, ySlot) ->
 			anim = new Animation
 			anim.createFromSheet config.framesCount, config.frameDuration, img, width, height, ySlot
@@ -84,7 +101,7 @@ define [
 			else
 				@state = @states.STANDING
 
-		fire: (game) ->
+		shot: (game) ->
 			missle = Math.random()
 
 			dir    = if @direction is @directions.LEFT then -1 else 1
@@ -106,6 +123,23 @@ define [
 			window.setTimeout ->
 				game.removeBody entity
 			, 300
+
+
+		fire: (game) ->
+			return if @isFiring
+
+			@isFiring = true
+			count = config.framesCount / 2
+			that  = @
+			interval = window.setInterval ->
+				that.shot game
+				count = count - 1
+				if count is 0
+					that.isFiring = false
+					window.clearInterval interval
+
+			, config.frameDuration
+
 
 		jump: (game) ->
 			if -0.01 < @linearVelocity.y < 0.01
