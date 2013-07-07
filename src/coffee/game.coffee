@@ -16,9 +16,9 @@ define [
 		speed = 3
 		guy = new BadGuy
 
-		ResourceManager = require ('frozen/ResourceManager')
-		resourceManager = new ResourceManager
-		resourceManager.imageDir = 'gfx'
+		# ResourceManager = require ('frozen/ResourceManager')
+		# resourceManager = new ResourceManager
+		# resourceManager.imageDir = 'gfx'
 
 
 		game = new BoxGame
@@ -28,27 +28,7 @@ define [
 			loadingBackground: "black"
 			update: update,
 			draw: draw,
-			resourceManager: resourceManager,
-			loadResources: (resourceManager) ->
-				boxData.entities.forEach (entity) ->
-					if entities[entity.type]
-						game.addBody new entities[entity.type] entity 
-
-				images = []
-				level1Data.entities.forEach (entity) ->
-					if entities[entity.type]
-						background = entity.background
-						images.push resourceManager.loadImage background
-
-				# true until resourceManager.allLoaded
-				console.log resourceManager.allLoaded
-
-				console.log images
-				images.forEach (image, index) ->
-					game.addBody new SceneObject level1Data.entities[index],image
-				console.log resourceManager.allLoaded
-
-
+	
 			initInput: (im) ->
 				im.addKeyAction keys.LEFT_ARROW
 				im.addKeyAction keys.RIGHT_ARROW
@@ -80,12 +60,14 @@ define [
 
 					@box.applyImpulseDegrees missle, 90, config.projectile_speed
 
+		_.each level1Data.entities, (entity) ->
+			image = entity.background
+			console.log "image just created! its width is ", image.width
+			console.log "image is ", image
+			game.addBody new SceneObject entity,image
+
 		game.addBody guy
 
 		#console.log level1Data.entities["sceneobject"]
 		#sceneObj = new SceneObject level1Data.entities[0],floorImage
-
-				
-
-
 		game.run()
