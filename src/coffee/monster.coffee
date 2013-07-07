@@ -19,6 +19,7 @@ define [
 		BACKWARD: -1
 
 		direction: 0 # -1 | 0 | 1
+		anim: 0
 
 		anims:
 			run: {}

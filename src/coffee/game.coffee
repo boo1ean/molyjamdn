@@ -11,9 +11,9 @@ define [
 	'./data/level1Data'
 	'./monster'
 	'./badguy'
+	'./enemy'
 	'./sceneobject'
-	'frozen/box2d/entities/Entity'
-	], (_, config, handleInput, initInput, update, draw, BoxGame, entities, boxData, level1Data, Monster, BadGuy, SceneObject, Entity) ->
+	], (_, config, handleInput, initInput, update, draw, BoxGame, entities, boxData, level1Data, Monster, BadGuy, Enemy, SceneObject) ->
 		speed = 3
 		guy = new BadGuy
 
@@ -39,6 +39,21 @@ define [
 			game.addBody objectToAdd
 			game.movableScene.push objectToAdd
 			objectToAdd.initialX = objectToAdd.x
+
+		enemy = new Enemy
+		enemy.x = Math.random()*100
+		enemy.y = Math.random()*100
+		enemy.id = "enemy"
+		enemy.game = game
+		enemy.badguy = guy
+
+		enemy.startMonitoring()
+		# enemy.halfWidth = 44
+		# enemy.halfHeight = 43
+		# enemy.gfx.run = img
+		game.movableScene.push enemy
+
+		game.addBody enemy
 
 		Contact = require 'frozen/box2d/listeners/Contact'
 		contact = new Contact
