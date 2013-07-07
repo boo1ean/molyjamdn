@@ -86,6 +86,6 @@ define [
 			, 300
 
 		jump: (game) ->
-			if -0.1 < @linearVelocity.y < 0.1
+			if -0.01 < @linearVelocity.y < 0.01
 				console.log @linearVelocity
 				game.box.applyImpulseDegrees @id, 0, @jumpForce
