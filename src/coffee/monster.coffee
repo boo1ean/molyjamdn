@@ -44,7 +44,7 @@ define [
 			stand: null
 			fireRun: null
 
-		jumpForce: 140
+		jumpForce: 90
 
 		constructor: (id) ->
 			@id = id if id?
