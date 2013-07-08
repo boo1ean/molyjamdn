@@ -14,5 +14,5 @@ define [
 
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
-				sup.apply @, arguments if config # DEBUG
+				sup.apply @, arguments if config.debug
 				ctx.drawImage @img, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale, @img.width,@img.height

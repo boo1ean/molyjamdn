@@ -17,6 +17,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": floor_long
         },
@@ -27,6 +28,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": floor
         },
@@ -38,6 +40,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -48,6 +51,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -58,6 +62,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -68,6 +73,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -78,6 +84,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -88,6 +95,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -98,6 +106,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -108,6 +117,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -118,6 +128,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -128,6 +139,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -138,6 +150,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -148,6 +161,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -158,6 +172,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -168,6 +183,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -178,6 +194,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": stair
         },
@@ -190,6 +207,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 2,
             "id": id(),
             "background": decor
         },
@@ -211,6 +229,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": floor
         },
@@ -221,6 +240,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": floor2
         },
@@ -231,6 +251,7 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 2,
             "id": id(),
             "background": tree1
         },
@@ -241,8 +262,20 @@ return {
             "zone": false,
             "staticBody": true,
             "type": "Rectangle",
+            "maskBits": 5,
             "id": id(),
             "background": floor_long
+        },
+        {
+            "x": -3300,
+            "y": -900,
+            "staticBody": true,
+            "zone": false,
+            "staticBody": true,
+            "type": "Rectangle",
+            "maskBits": 2,
+            "id": "building",
+            "background": building1
         },
 
 		],

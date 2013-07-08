@@ -13,6 +13,7 @@ define [
 		halfWidth: 44
 		halfHeight: 43
 		id: 'badguy'
+		maskBits: 5
 		hp: 100
 		fixedRotation: true
 		gfx:

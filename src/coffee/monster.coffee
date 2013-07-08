@@ -49,11 +49,12 @@ define [
 		constructor: (id) ->
 			@id = id if id?
 			@createAnimations()
+			@halfWidth /= 2
 
 		draw: dcl.superCall (sup) ->
 			(ctx, scale) ->
 				sup.apply @,arguments if config.debug
-				@currentAnimation().draw ctx, (@x - @halfWidth) * scale, (@y - @halfHeight) * scale
+				@currentAnimation().draw ctx, (@x - @halfWidth*2) * scale, (@y - @halfHeight) * scale
 
 		updateAnimations: (millis) ->
 			@updateDirection()
