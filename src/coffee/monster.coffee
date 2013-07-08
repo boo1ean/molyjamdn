@@ -144,7 +144,7 @@ define [
 
 
 		jump: (game) ->
-			if -0.01 < @linearVelocity.y < 0.01
+			if -0.1 < @linearVelocity.y < 0.1
 				game.box.applyImpulseDegrees @id, 0, @jumpForce
 
 		destructor: ->
