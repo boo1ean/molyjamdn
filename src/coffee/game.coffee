@@ -185,7 +185,17 @@ define [
 				game.movableScene.push enemy
 
 
-			
+		enemy = new Enemy
+		enemy.x = 100
+		enemy.y = 100
+		enemy.id = "enemy"
+		enemy.game = game
+		enemy.badguy = guy
+
+		enemy.startMonitoring()
+		game.addBody enemy
+		game.movableScene.push enemy
+
 
 		contact.game = game
 		game.box.addContactListener contact
