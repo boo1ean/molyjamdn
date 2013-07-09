@@ -32,19 +32,18 @@ define [
 			that = @
 			@monitoringInterval = window.setInterval ->
 				dist = distance {x:that.x, y:that.y},{x:that.badguy.x, y:that.badguy.y}
-				# console.log "dist",dist
 				if dist < 35
 					if not that.fireInterval
 						that.fireInterval = that.startFiring()
 						that.startFollowing()
 				else
 					clearInterval that.fireInterval
-					# console.log "intervalID deleted!",that.intervalID
 					that.fireInterval = null
 			, 1000
 
 		startFollowing: ->
 			that = @
+			clearInterval @followingInterval
 			@followingInterval = window.setInterval ->
 				degr = degreesFromCenter {x:that.x, y:that.y},{x:that.badguy.x, y:that.badguy.y}
 				if degr > 180
