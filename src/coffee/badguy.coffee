@@ -21,3 +21,10 @@ define [
 			stand: stand
 			fire: fire
 			fireRun: fireRun
+
+		anims:
+			run: {}
+			fire: {}
+			jump: {}
+			stand: {}
+			fireRun: {}
