@@ -5,9 +5,10 @@ define(['./utils/generator',
     	'frozen/plugins/loadImage!gfx/decor.png',
 		'frozen/plugins/loadImage!gfx/building1.png',
 		'frozen/plugins/loadImage!gfx/stair.png',
-        'frozen/plugins/loadImage!gfx/tree1.png'
+        'frozen/plugins/loadImage!gfx/tree1.png',
+        'frozen/plugins/loadImage!gfx/building2.png',
 	   ],
-	 function(id, floor, floor2, floor_long, decor, building1, stair, tree1) {
+	 function(id, floor, floor2, floor_long, decor, building1, stair, tree1, building2) {
 return {
 	 	"entities": [
         {
@@ -267,7 +268,7 @@ return {
             "background": floor_long
         },
         {
-            "x": -3300,
+            "x": -4270,
             "y": -900,
             "staticBody": true,
             "zone": false,
@@ -275,7 +276,7 @@ return {
             "type": "Rectangle",
             "maskBits": 2,
             "id": "building",
-            "background": building1
+            "background": building2
         },
 
 		],
